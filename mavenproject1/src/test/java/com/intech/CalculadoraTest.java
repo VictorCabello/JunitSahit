@@ -1,20 +1,48 @@
 package com.intech;
 
+import java.util.Arrays;
 import org.junit.After;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.BeforeClass;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
+import org.junit.runners.Parameterized.Parameters;
 
-
+@RunWith(Parameterized.class)
 public class CalculadoraTest
 {
     //Object under test
     private static Calculadora itsCalculadora;
     
+    private int itsA;
+    private int itsB;
+    private int itsExpected;
+    
+    public CalculadoraTest(int anA, int aB, int anExpected)
+    {
+        itsA = anA;
+        
+        itsB = aB;
+        
+        itsExpected = anExpected;
+    }
+    
+    @Parameters
+    public static Iterable<Object[]> data()
+    {
+        return Arrays.asList(new  Object[][]
+        {
+            {3, 3, 6},
+            {2, 5, 7},
+            {4, 4, 8}
+        });
+    }
+    
     @BeforeClass
-    public void setupClass()
+    public static void setupClass()
     {
         itsCalculadora = new Calculadora();
     }
@@ -35,24 +63,11 @@ public class CalculadoraTest
     public void test1()
     {
         // Prapare ------------------------------------------------------------
-        int expected = 6;
         
         // Execute -------------------------------------------------------------
-        int suma = itsCalculadora.suma(3, 3);
+        int suma = itsCalculadora.suma(itsA, itsB);
         
         // Verify --------------------------------------------------------------
-        assertEquals(expected, suma);
-    }
-    @Test
-    public void test2()
-    {
-        // Prapare ------------------------------------------------------------
-        int expected = 7;
-        
-        // Execute -------------------------------------------------------------
-        int suma = itsCalculadora.suma(2, 5);
-        
-        // Verify --------------------------------------------------------------
-        assertEquals(expected, suma);
+        assertEquals(itsExpected, suma);
     }
 }
