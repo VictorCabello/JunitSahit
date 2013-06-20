@@ -18,4 +18,15 @@ public class CalculadoraTest
         
         assertEquals(expected, suma);
     }
+    @Test
+    public void test2()
+    {
+        Calculadora myCalculadora = new Calculadora();
+        myCalculadora.on();
+        int suma = myCalculadora.suma(2, 5);
+        myCalculadora.off();
+        int expected = 7;
+        
+        assertEquals(expected, suma);
+    }
 }
