@@ -5,17 +5,23 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 import org.junit.Before;
+import org.junit.BeforeClass;
 
 
 public class CalculadoraTest
 {
     //Object under test
-    private Calculadora itsCalculadora;
+    private static Calculadora itsCalculadora;
+    
+    @BeforeClass
+    public void setupClass()
+    {
+        itsCalculadora = new Calculadora();
+    }
     
     @Before
     public void setup()
     {
-        itsCalculadora = new Calculadora();
         itsCalculadora.on();
     }
     
