@@ -17,17 +17,11 @@ public class CalculadoraTest
     //Object under test
     private static Calculadora itsCalculadora;
     
-    private int itsA;
-    private int itsB;
-    private int itsExpected;
+    private Suma itsSuma;
     
-    public CalculadoraTest(int anA, int aB, int anExpected)
+    public CalculadoraTest(Suma aSuma)
     {
-        itsA = anA;
-        
-        itsB = aB;
-        
-        itsExpected = anExpected;
+        itsSuma = aSuma;
     }
     
     @Parameters
@@ -35,9 +29,9 @@ public class CalculadoraTest
     {
         return Arrays.asList(new  Object[][]
         {
-            {3, 3, 6},
-            {2, 5, 7},
-            {4, 4, 8}
+            { new Suma(){{ setSumandoA(3); setSumandoB(3); setTotal(6); }} },
+            { new Suma(){{ setSumandoA(2); setSumandoB(5); setTotal(7); }} },
+            { new Suma(){{ setSumandoA(4); setSumandoB(4); setTotal(8); }} }
         });
     }
     
@@ -65,9 +59,9 @@ public class CalculadoraTest
         // Prapare ------------------------------------------------------------
         
         // Execute -------------------------------------------------------------
-        int suma = itsCalculadora.suma(itsA, itsB);
+        int suma = itsCalculadora.suma(itsSuma.getSumandoA(), itsSuma.getSumandoB());
         
         // Verify --------------------------------------------------------------
-        assertEquals(itsExpected, suma);
+        assertEquals(itsSuma.getTotal(), suma);
     }
 }
